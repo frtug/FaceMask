@@ -96,3 +96,60 @@ plt.xlabel('# epochs')
 plt.ylabel('loss')
 plt.legend()
 plt.show()
+
+plt.figure()
+plt.imshow(train_data[0])
+plt.colorbar()
+plt.grid(False)
+plt.xlabel(train_target[i])
+plt.show()
+
+plt.figure(figsize=(10,10))
+for i in range(25):
+    plt.subplot(5,5,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_data[i], cmap=plt.cm.binary)
+    plt.xlabel(train_target[i])
+plt.show()
+
+probability_model = tf.keras.Sequential([model, 
+                                         tf.keras.layers.Softmax()])
+
+predictions = probability_model.predict(test_data)
+predictions[0]
+
+np.argmax(predictions[0])
+
+def tocate(data):
+  if(data[0] == float(1) ):
+    return 1
+  if(data[1] == float(1)):
+      return 0
+      
+print(tocate(test_target[0]))
+
+
+def plot_image(i, predictions_array, true_label, img):
+  true_label, img = true_label[i], img[i]
+  plt.grid(False)
+  plt.xticks([])
+  plt.yticks([])
+  plt.imshow(img)
+  predicted_label = np.argmax(predictions_array)
+  if predicted_label == 0:
+    color = 'blue'
+  else:
+    color = 'red'
+
+  plt.xlabel("{} {:2.0f}% ".format(CATEGORIES[predicted_label],
+                                100*np.max(predictions_array)
+                                ),
+                                color=color)
+
+i = 0
+plt.figure(figsize=(6,3))
+plt.subplot(1,2,1)
+plot_image(i, predictions[i], test_target, test_data)
+plt.show()
