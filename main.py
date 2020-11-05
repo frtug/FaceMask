@@ -7,11 +7,17 @@ from keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 import tensorflow as tf
-import cv2
+import cv2,os
 import numpy as np
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+from sklearn.preprocessing import LabelBinarizer
+from tensorflow.keras.preprocessing.image import load_img
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.utils import to_categorical
 
 
-DIRECTORY = "dataset"
+
+DIRECTORY = "Face-Mask-Detection/dataset"
 CATEGORIES = ["with_mask", "without_mask"]
 
 
