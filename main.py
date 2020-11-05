@@ -114,8 +114,7 @@ for i in range(25):
     plt.xlabel(train_target[i])
 plt.show()
 
-probability_model = tf.keras.Sequential([model, 
-                                         tf.keras.layers.Softmax()])
+probability_model = tf.keras.Sequential([model,tf.keras.layers.Softmax()])
 
 predictions = probability_model.predict(test_data)
 predictions[0]
